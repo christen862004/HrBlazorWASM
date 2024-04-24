@@ -1,0 +1,26 @@
+﻿@page "/First"
+
+<PageTitle>First ComponentB</PageTitle>
+<h3>FirstComponent</h3>
+<input type="button" @onclick=ShowMsg value="Show MEssage" />
+<h2>One Way Binding From C# To HTML</h2>
+<h3>@Msg</h3>
+<input type="text" value="@Msg"  class="form form-control"/>
+<hr />
+<h2>Two Way Binding FRom and to C#  HTML with update </h2>
+<input type="text"  style="background-color:gray;color:white"
+    @bind-value="Msg"  
+    @bind-value:event="oninput"  class="form form-control" /> <!--value edit -->
+
+@* <input type="text"
+    @bind="Msg"  @bind:event="oninput"/> *@
+
+
+@code {
+    public string Msg { get; set; } = "hello";
+    void ShowMsg()
+    {
+        Msg = "New Message";
+        Console.WriteLine("Hello From C#");
+    }
+}
