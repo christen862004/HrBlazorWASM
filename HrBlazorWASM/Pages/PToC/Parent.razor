@@ -1,0 +1,13 @@
+﻿@page "/Parent1"
+
+<h3>Parent</h3>
+<input @bind-value="ParentMsg" type="text"/>
+
+<Child Message="@ParentMsg"></Child> <!--Object-->
+
+<hr />
+
+<Child Message="Static Message"></Child>   <!--object-->
+@code {
+    public string ParentMsg { get; set; }
+}

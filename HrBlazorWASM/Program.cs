@@ -1,5 +1,7 @@
+using HrBlazorWASM.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using System.Reflection.Metadata;
 
 namespace HrBlazorWASM
 {
@@ -13,7 +15,8 @@ namespace HrBlazorWASM
            
             builder.RootComponents.Add<HeadOutlet>("head::after");//title page base on open component
 
-            
+            builder.Services.AddScoped<EmployeeService>();
+            builder.Services.AddScoped<DepartmentService>();
             //register
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 

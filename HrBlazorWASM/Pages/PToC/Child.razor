@@ -1,0 +1,10 @@
+﻿
+<div style="border:10px solid red;margin:10px">
+    <h3>Child</h3>
+    <h4>@Message</h4>
+</div>
+
+@code {
+    [Parameter]//Route - PArent value Attribute 
+    public string Message { get; set; } = "Initial Message";
+}

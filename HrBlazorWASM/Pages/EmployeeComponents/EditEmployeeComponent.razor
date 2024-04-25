@@ -1,0 +1,49 @@
+﻿@page "/Emp/Edit/{id:int}"
+<h3>EditEmployeeComponent</h3>
+@if (EmployeeObj != null)
+{
+    <EditForm Model="EmployeeObj" on>
+        <div>
+            <label>NAme</label>
+            <InputText @bind-Value="EmployeeObj.Name" class="form form-control"></InputText>
+        </div>
+        <div>
+            <label>Salary</label>
+            <InputNumber @bind-Value="EmployeeObj.Salary" class="form form-control"></InputNumber>
+        </div>
+        <div>
+            <label>Image</label>
+            <InputText @bind-Value="EmployeeObj.Image" class="form form-control"></InputText>
+        </div>
+        <div>
+            <label>DeptID</label>
+            <InputNumber @bind-Value="EmployeeObj.Dept_Id" class="form form-control"></InputNumber>
+        </div>
+        <input type="submit" class="btn btn-success" value="Save" />
+    </EditForm>
+    @EmployeeObj.Name
+    @EmployeeObj.Salary
+    @EmployeeObj.Image
+    @EmployeeObj.Dept_Id
+}
+else
+{
+    <h1>Wait or Invalid Id</h1>
+}
+
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    [Inject]
+    public EmployeeService EmployeeService { get; set; }
+
+    public Employee EmployeeObj { get; set; }
+
+    protected override void OnInitialized()
+    {
+        EmployeeObj = EmployeeService.getByID(id);
+        base.OnInitialized();
+    }
+}

@@ -1,0 +1,17 @@
+﻿@page "/Parent2"
+<h3>Parent</h3>
+<h4>Get Info From Child To Parent</h4>
+
+<Child CounterChangeEvent="GetCounterHandeller">
+</Child> <!--register (subscript)-->
+
+<h1>@ChildCounter</h1>
+
+@code {
+    public int ChildCounter { get; set; }
+
+    void GetCounterHandeller(int c)
+    {
+        ChildCounter = c;
+    }
+}

@@ -1,0 +1,24 @@
+﻿@page "/Emp/Details/{id:int}"
+@inject EmployeeService empService
+
+<PageTitle>Employee DEtails</PageTitle>
+<h3>EmpDetailsComponent</h3>
+
+<h1>@Employee.Name</h1>
+<img src="/Images/@Employee.Image" style="width:200px"/>
+
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    
+    // [Inject]
+    // public EmployeeService empService { get; set; }
+
+    public Employee Employee { get; set; }
+    protected override void OnInitialized()
+    {
+        Employee= empService.getByID(id);
+        base.OnInitialized();
+    }
+}

@@ -1,0 +1,13 @@
+﻿
+<div style="border:10px solid red;margin:10px">
+    <h3>Child</h3>
+    <h4>@Message</h4>
+    <h5>@Id</h5>
+</div>
+@code {
+    [CascadingParameter(Name ="Msg")]//autho  - write paret not as attribute
+    public string Message { get; set; } = "Init MEssage";
+    
+    [CascadingParameter(Name ="Id")]
+    public int Id { get; set; }
+}

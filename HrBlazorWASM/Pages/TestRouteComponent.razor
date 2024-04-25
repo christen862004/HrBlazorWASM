@@ -1,0 +1,15 @@
+﻿@page "/Test/{id:int}/{name}/{age}"
+<h3>TestRouteComponent</h3>
+
+
+<h1>@id</h1>
+<h2>@name</h2>
+
+@code {
+    [Parameter]
+    public int id { get; set; }//Route frmo user "Browser"
+    
+    [Parameter]
+    public string name { get; set; }
+
+}

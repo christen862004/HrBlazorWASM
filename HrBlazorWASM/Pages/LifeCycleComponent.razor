@@ -1,0 +1,31 @@
+﻿@page "/lifeCycle/{id:int}"
+<h3>LifeCycleComponent</h3>
+
+@code {
+    //Componentbase
+    [Parameter]
+    public int id { get; set; }//parent
+
+    public LifeCycleComponent()
+    {
+        Console.WriteLine($"1) constructoe id={id}");
+        //id = 44;
+    }
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        //befor on inializ (route as segment -parent - deafult)
+        Console.WriteLine($"2)SetParameters id={id}");
+        return base.SetParametersAsync(parameters);//get paremeter value
+    }
+    protected override void OnInitialized()
+    {
+        Console.WriteLine($"3)Initalize method id={id}");
+        base.OnInitialized();
+    }
+    
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine($"4)OnParametersSet id={id}");
+        base.OnParametersSet();
+    }
+}
