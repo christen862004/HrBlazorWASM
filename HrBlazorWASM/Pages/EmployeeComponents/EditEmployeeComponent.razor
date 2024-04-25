@@ -1,8 +1,9 @@
 ﻿@page "/Emp/Edit/{id:int}"
+
 <h3>EditEmployeeComponent</h3>
 @if (EmployeeObj != null)
 {
-    <EditForm Model="EmployeeObj" on>
+    <EditForm Model="EmployeeObj" >
         <div>
             <label>NAme</label>
             <InputText @bind-Value="EmployeeObj.Name" class="form form-control"></InputText>
@@ -45,5 +46,6 @@ else
     {
         EmployeeObj = EmployeeService.getByID(id);
         base.OnInitialized();
+        
     }
 }
