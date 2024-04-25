@@ -1,11 +1,13 @@
 ﻿@page "/Emp/Edit/{id:int}"
+@inject NavigationManager navManager
 
 <h3>EditEmployeeComponent</h3>
 @if (EmployeeObj != null)
 {
-    <EditForm Model="EmployeeObj" >
+    <EditForm Model="EmployeeObj" OnSubmit="Save" >
         <div>
             <label>NAme</label>
+            
             <InputText @bind-Value="EmployeeObj.Name" class="form form-control"></InputText>
         </div>
         <div>
@@ -18,11 +20,17 @@
         </div>
         <div>
             <label>DeptID</label>
-            <InputNumber @bind-Value="EmployeeObj.Dept_Id" class="form form-control"></InputNumber>
+            @* <InputNumber @bind-Value="EmployeeObj.Dept_Id" class="form form-control"></InputNumber> *@
+            <InputSelect @bind-Value="EmployeeObj.Dept_Id" class="form form-control">
+                @foreach (var item in DeptList)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </InputSelect>
         </div>
         <input type="submit" class="btn btn-success" value="Save" />
     </EditForm>
-    @EmployeeObj.Name
+    @EmployeeObj.Name 
     @EmployeeObj.Salary
     @EmployeeObj.Image
     @EmployeeObj.Dept_Id
@@ -40,12 +48,29 @@ else
     [Inject]
     public EmployeeService EmployeeService { get; set; }
 
+    [Inject]
+    public DepartmentService DeptService { get; set; }
+
     public Employee EmployeeObj { get; set; }
+
+    public List<Department> DeptList { get; set; }
 
     protected override void OnInitialized()
     {
         EmployeeObj = EmployeeService.getByID(id);
+
+        DeptList = DeptService.getAll();
+
         base.OnInitialized();
-        
+
+    }
+    void Save()
+    {
+        Console.WriteLine("Data saved");
+        //API
+        //redierct another conponent
+        //navManager.NavigateTo($"/Emp/Details/{EmployeeObj.Id}");
+        navManager.NavigateTo("/Emp/Details/"+id);
+
     }
 }
