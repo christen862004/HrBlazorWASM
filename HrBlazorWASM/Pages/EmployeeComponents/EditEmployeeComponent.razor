@@ -1,22 +1,28 @@
 ﻿@page "/Emp/Edit/{id:int}"
+
 @inject NavigationManager navManager
 
 <h3>EditEmployeeComponent</h3>
 @if (EmployeeObj != null)
 {
-    <EditForm Model="EmployeeObj" OnSubmit="Save" >
+    <EditForm Model="EmployeeObj" OnValidSubmit="Save"  OnInvalidSubmit="InvalidSave" >
+        <!--Form Support Validation-->
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
         <div>
             <label>NAme</label>
-            
-            <InputText @bind-Value="EmployeeObj.Name" class="form form-control"></InputText>
+            <InputText @bind-Value="EmployeeObj.Name"  class="form form-control"></InputText>
+            <ValidationMessage For="()=>EmployeeObj.Name"></ValidationMessage>
         </div>
         <div>
             <label>Salary</label>
             <InputNumber @bind-Value="EmployeeObj.Salary" class="form form-control"></InputNumber>
+            <ValidationMessage For="()=>EmployeeObj.Salary"></ValidationMessage>
         </div>
         <div>
             <label>Image</label>
             <InputText @bind-Value="EmployeeObj.Image" class="form form-control"></InputText>
+            <ValidationMessage For="()=>EmployeeObj.Image"></ValidationMessage>
         </div>
         <div>
             <label>DeptID</label>
@@ -27,6 +33,7 @@
                     <option value="@item.Id">@item.Name</option>
                 }
             </InputSelect>
+            <ValidationMessage For="()=>EmployeeObj.Dept_Id"></ValidationMessage>
         </div>
         <input type="submit" class="btn btn-success" value="Save" />
     </EditForm>
@@ -66,11 +73,18 @@ else
     }
     void Save()
     {
+
         Console.WriteLine("Data saved");
         //API
         //redierct another conponent
         //navManager.NavigateTo($"/Emp/Details/{EmployeeObj.Id}");
         navManager.NavigateTo("/Emp/Details/"+id);
 
+    }
+    
+    void InvalidSave()
+    {
+
+        Console.WriteLine("Invalid Data");
     }
 }

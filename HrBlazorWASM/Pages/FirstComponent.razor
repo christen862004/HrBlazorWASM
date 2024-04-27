@@ -15,9 +15,19 @@
 @* <input type="text"
     @bind="Msg"  @bind:event="oninput"/> *@
 
+<input type="button" @onclick='()=>showMsg2("hello")' value="Hello" />
+<input type="button" @onclick='()=>showMsg2("Bye")' value="bye"/>
+
+
 
 @code {
     public string Msg { get; set; } = "hello";
+    void showMsg2(string m)
+    {
+        Console.WriteLine(m);
+    }
+
+
     void ShowMsg()
     {
         Msg = "New Message";
